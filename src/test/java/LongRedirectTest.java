@@ -19,13 +19,17 @@ public class LongRedirectTest {
         int statusCode = responseForLongRedirectTest.getStatusCode();
 
 
-        while (statusCode != 200) {
+        while (statusCode == 301) {
 
             responseForLongRedirectTest = getResponse(location);
 
-            countRedirect++;
             statusCode = responseForLongRedirectTest.getStatusCode();
             location = responseForLongRedirectTest.getHeader("Location");
+
+            if (statusCode == 200){
+                break;
+            }
+            countRedirect++;
 
         }
 

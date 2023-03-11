@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CheckCookieEx11 {
 
     @Test
-    public void CheckCookie(){
+    public void checkCookie(){
 
         Response response = RestAssured
                 .get("https://playground.learnqa.ru/api/homework_cookie")

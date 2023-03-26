@@ -49,6 +49,12 @@ public class ApiCoreRequests {
                 .andReturn();
     }
 
-
+    @Step("Make a GET-request without data")
+    public Response makeGetRequestWithoutData(String url){
+        return given()
+                .filter(new AllureRestAssured())
+                .get(url)
+                .andReturn();
+    }
 
 }

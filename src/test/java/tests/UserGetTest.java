@@ -56,7 +56,7 @@ public class UserGetTest  extends BaseTestCase {
       //  System.out.println(responseUserData.asString());
     }
 
-    @Description("This test checks get information about another user with auth")
+    @Description("This test checks get information about another user with auth ")
     @DisplayName("Test negative get info")
     @Test
     public void testGetUserDetailsAuthAsAnotherUser(){

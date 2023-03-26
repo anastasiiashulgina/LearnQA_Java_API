@@ -61,7 +61,16 @@ public class UserGetTest  extends BaseTestCase {
     @Test
     public void testGetUserDetailsAuthAsAnotherUser(){
 
-        //authorize user
+        //GENERATE NEW USER
+        Map<String, String> userData = DataGenetator.getRegistrationData();
+
+
+        Response responseCreateAuth = apiCoreRequests
+                .makePostRequest("https://playground.learnqa.ru/api/user/", userData);
+
+        String userId = responseCreateAuth.jsonPath().get("id");
+
+        //AUTHORIZE EXIST USER
         Map<String, String> authData = new HashMap<>();
         authData.put("email", "vinkotov@example.com");
         authData.put("password", "1234");
@@ -72,7 +81,8 @@ public class UserGetTest  extends BaseTestCase {
         this.cookie = this.getCookie(responseGetAuth, "auth_sid");
         this.header = this.getHeader(responseGetAuth, "x-csrf-token");
 
-        String url = "https://playground.learnqa.ru/api/user/" + getNewUserId();
+        //GET INFORMATION ABOUT NEW USER
+        String url = "https://playground.learnqa.ru/api/user/" + userId;
 
         Response responseUserData = apiCoreRequests
                 .makeGetRequest(url, this.header, this.cookie);
@@ -83,18 +93,4 @@ public class UserGetTest  extends BaseTestCase {
         Assertions.assertJsonHasNotFields(responseUserData, "emailName");
 
     }
-
-    private String getNewUserId() {
-        Map<String, String> userData = new HashMap<>();
-        String email = DataGenetator.getRandomEmail();
-        userData.put("email", email);
-        userData.put("password", "1234");
-        userData.put("username", "learnqa");
-        userData.put("firstName", "learnqa");
-        userData.put("lastName", "learnqa");
-        Response responseCreateAuth = apiCoreRequests
-                .makePostRequest("https://playground.learnqa.ru/api/user/", userData);
-        return  (String) responseCreateAuth.jsonPath().get("id");
-    }
-
 }

@@ -1,6 +1,6 @@
 package tests;
 
-import io.qameta.allure.Description;
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import lib.ApiCoreRequests;
 import lib.Assertions;
@@ -11,12 +11,16 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+
+@Epic("User Delete cases")
+@Feature("User delete")
 public class UserDeleteTest {
 
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
 
     @Description("This test checks delete non-removable user")
     @DisplayName("Test positive delete info")
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void testDeleteNonRemovableUser() {
 
@@ -51,6 +55,7 @@ public class UserDeleteTest {
 
     @Description("This test checks delete created user")
     @DisplayName("Test positive delete info")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     public void testDeleteUser() {
         //GENERATE USER
@@ -88,6 +93,7 @@ public class UserDeleteTest {
 
     @Description("This test checks delete user with another user auth")
     @DisplayName("Test negative delete info")
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void testDeleteJustCreatedWithAnotherUserAuthTest() {
         //GENERATE USER 1 (for delete)

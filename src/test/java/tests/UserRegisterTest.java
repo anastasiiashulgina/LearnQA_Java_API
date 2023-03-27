@@ -1,6 +1,6 @@
 package tests;
 
-import io.qameta.allure.Description;
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import lib.Assertions;
 import lib.BaseTestCase;
@@ -16,6 +16,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.HashMap;
 import java.util.Map;
 
+
+@Epic("User registration cases")
+@Feature("Registration")
 public class UserRegisterTest extends BaseTestCase {
 
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
@@ -35,6 +38,7 @@ public class UserRegisterTest extends BaseTestCase {
 
     @Description("This test checks create user with existing email")
     @DisplayName("Test negative auth user")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     public void testCreateUserWithExistingEmail() {
         String email = "vinkotov@example.com";
@@ -50,6 +54,7 @@ public class UserRegisterTest extends BaseTestCase {
 
     @Description("This test checks create user with correct parameters")
     @DisplayName("Test positive auth user")
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void testCreateUserSuccesfully() {
 
@@ -65,6 +70,7 @@ public class UserRegisterTest extends BaseTestCase {
 
     @Description("This test checks create user with incorrect email without @")
     @DisplayName("Test negative auth user")
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void testCreateUserWithInCorrectEmail() {
         String email = DataGenetator.getEmailWithoutAt();
@@ -83,6 +89,7 @@ public class UserRegisterTest extends BaseTestCase {
 
     @Description("This test checks create user without one of parameters")
     @DisplayName("Test negative auth user")
+    @Severity(SeverityLevel.MINOR)
     @ParameterizedTest
     @ValueSource(strings = {"email", "password", "username", "firstName", "lastName"})
     public void testCreateUserWithoutOneOfParametrs(String condition) {
@@ -99,6 +106,7 @@ public class UserRegisterTest extends BaseTestCase {
 
     @Description("This test checks create user with username in one symbol")
     @DisplayName("Test negative auth user")
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void testCreateUserWithUsernameOneSymbol() {
 
@@ -116,6 +124,7 @@ public class UserRegisterTest extends BaseTestCase {
 
     @Description("This test checks create user with username with name more then 250 symbols")
     @DisplayName("Test negative auth user")
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void testCreateUserWithLongUsername() {
 

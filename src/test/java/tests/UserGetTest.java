@@ -1,6 +1,6 @@
 package tests;
 
-import io.qameta.allure.Description;
+import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import lib.ApiCoreRequests;
@@ -13,6 +13,9 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+
+@Epic("User get info cases")
+@Feature("Get User Info")
 public class UserGetTest  extends BaseTestCase {
 
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
@@ -21,6 +24,7 @@ public class UserGetTest  extends BaseTestCase {
 
     @Description("This test checks get information about user without auth")
     @DisplayName("Test negative get info")
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void testGetUserDataNotAuth(){
 
@@ -35,6 +39,7 @@ public class UserGetTest  extends BaseTestCase {
 
     @Description("This test checks get information about user with auth")
     @DisplayName("Test positive get info")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     public void testGetUserDetailsAuthAsSameUser() {
 
@@ -53,11 +58,12 @@ public class UserGetTest  extends BaseTestCase {
 
         String [] expectedFields = {"username", "firstName", "lastName", "email"};
         Assertions.assertJsonHasFields(responseUserData, expectedFields);
-      //  System.out.println(responseUserData.asString());
+      //System.out.println(responseUserData.asString());
     }
 
     @Description("This test checks get information about another user with auth ")
     @DisplayName("Test negative get info")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     public void testGetUserDetailsAuthAsAnotherUser(){
 

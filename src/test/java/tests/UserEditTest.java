@@ -1,6 +1,6 @@
 package tests;
 
-import io.qameta.allure.Description;
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import lib.DataGenetator;
 import org.junit.jupiter.api.DisplayName;
@@ -13,6 +13,8 @@ import lib.DataGenetator;
 import java.util.HashMap;
 import java.util.Map;
 
+@Epic("User edit cases")
+@Feature("Edit User Info")
 public class UserEditTest extends BaseTestCase {
 
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
@@ -21,6 +23,7 @@ public class UserEditTest extends BaseTestCase {
 
     @Description("This test checks edit information about user with auth")
     @DisplayName("Test positive put info")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     public void testEditJustCreatedTest() {
         //GENERATE USER
@@ -63,6 +66,7 @@ public class UserEditTest extends BaseTestCase {
 
     @Description("This test checks edit information about user without auth")
     @DisplayName("Test negative put info")
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void testEditJustCreatedWithoutAuthTest(){
         //GENERATE USER 1
@@ -93,6 +97,7 @@ public class UserEditTest extends BaseTestCase {
 
     @Description("This test checks edit information about user with another user auth")
     @DisplayName("Test negative put info")
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void testEditJustCreatedWithAnotherUserAuthTest() {
         //GENERATE USER 1 (for edit)
@@ -146,6 +151,7 @@ public class UserEditTest extends BaseTestCase {
 
     @Description("This test checks edit information about user with auth, but with incorrect email")
     @DisplayName("Test negative put info")
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void testEditJustCreatedWithIncorrectEmailTest() {
         //GENERATE USER
@@ -187,6 +193,7 @@ public class UserEditTest extends BaseTestCase {
 
     @Description("This test checks edit information about user with auth, but with short first name")
     @DisplayName("Test negative put info")
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void testEditJustCreatedWithShortFirstNameTest() {
         //GENERATE USER

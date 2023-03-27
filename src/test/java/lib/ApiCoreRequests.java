@@ -57,4 +57,34 @@ public class ApiCoreRequests {
                 .andReturn();
     }
 
+    @Step("Make a PUT-request with token, auth cookie and edit data")
+    public Response makePutRequest(String url, String token, String cookie, Map<String, String> editData){
+        return given()
+                .filter(new AllureRestAssured())
+                .header(new io.restassured.http.Header("x-csrf-token", token))
+                .cookie("auth_sid", cookie)
+                .body(editData)
+                .put(url)
+                .andReturn();
+    }
+
+    @Step("Make a PUT-request with edit data but without token and auth cookie")
+    public Response makePutRequestWithoutTokenCookie(String url, Map<String, String> editData){
+        return given()
+                .filter(new AllureRestAssured())
+                .body(editData)
+                .put(url)
+                .andReturn();
+    }
+
+    @Step("Make a DELETE-request")
+    public Response makeDeleteRequest(String url, String token, String cookie){
+        return given()
+                .filter(new AllureRestAssured())
+                .header(new io.restassured.http.Header("x-csrf-token", token))
+                .cookie("auth_sid", cookie)
+                .delete(url)
+                .andReturn();
+    }
+
 }
